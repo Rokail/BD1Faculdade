@@ -1,0 +1,35 @@
+where lower(nome_empregado) = 'pato donald';
+
+--25 - Quais empregados trabalham no setor de 'Produção de Sólidos'?
+select x.nome_empregado
+from empregado x, setor y
+where x.cod_setor = y.cod_setor
+and lower(nome_setor) = 'produção de sólidos';
+
+--26 - Quais são os dependentes do tipo 'agregados' e seus respectivos responsáveis?
+select nome_dependente, nome_empregado
+from dependente x, empregado y, tipo t
+where x.cod_empregado = y.cod_empregado
+and x.cod_tipo = t.cod_tipo
+and lower(nome_tipo) = 'agregado';
+
+--27 - Quais os dependentes dos empregados que trabalham na 'Diretoria'?
+select nome_dependente
+from dependente d, setor s, empregado x
+where d.cod_empregado = x.cod_empregado
+and s.cod_setor = x.cod_setor
+and lower(nome_setor) = 'diretoria';
+
+--28 - Quais os dependentes do 'Pato Donald', do 'Homer Simpson', do 'Cebolinha' e do 'Pateta'?
+select nome_dependente
+from dependente x, empregado y
+where x.cod_empregado = y.cod_empregado
+and (lower(nome_empregado) = 'homer simpson'
+or lower(nome_empregado) = 'pato donald'
+or lower(nome_empregado) = 'cebolinha'
+or lower(nome_empregado) = 'pateta');
+
+select nome_dependente
+from dependente x, empregado y
+where x.cod_empregado = y.cod_empregado
+and lower(nome_empregado) in ('homer simpson', 'pato donald', 'cebolinha', 'pateta');
